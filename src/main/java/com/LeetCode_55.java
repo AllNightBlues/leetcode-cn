@@ -29,4 +29,13 @@ public class LeetCode_55 {
         return true;
     }
 
+    public boolean canJump1(int[] nums) {
+        int maxStep = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (maxStep == 0) return false;
+            maxStep = Math.max(maxStep - 1, nums[i]);
+        }
+        return true;
+    }
+
 }
