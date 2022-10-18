@@ -16,7 +16,7 @@ import java.util.LinkedList;
  **/
 public class LeetCode_739 {
 
-    public int[] dailyTemperatures(int[] temperatures) {
+    public int[] dailyTemperatures1(int[] temperatures) {
         LinkedList<Integer> stack = new LinkedList<>();
         int[] ret = new int[temperatures.length];
         for (int i = 0; i < temperatures.length; i++) {
@@ -28,4 +28,23 @@ public class LeetCode_739 {
         }
         return ret;
     }
+
+    public int[] dailyTemperatures2(int[] temperatures) {
+        int length = temperatures.length;
+        int[] ret = new int[length];
+
+        for (int i = length - 2; i >= 0; i--) {
+            for (int backIdx = i + 1; backIdx < length; backIdx+=ret[backIdx]) {
+                if (temperatures[backIdx] > temperatures[i]) {
+                    ret[i] = backIdx - i;
+                    break;
+                } else if (ret[backIdx] == 0) {
+                    ret[i] = 0;
+                    break;
+                }
+            }
+        }
+        return ret;
+    }
+
 }
