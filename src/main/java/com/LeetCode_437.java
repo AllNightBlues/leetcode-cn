@@ -41,14 +41,14 @@ public class LeetCode_437 {
         }
         currSum += root.val;
 
-        long result = prefixSum.getOrDefault(currSum - target, 0);
+        int result = prefixSum.getOrDefault(currSum - target, 0);
         prefixSum.put(currSum, prefixSum.getOrDefault(currSum, 0) + 1);
 
         result = result + travelsal(root.left, currSum, target, prefixSum)
                 + travelsal(root.right, currSum, target, prefixSum);
         
         prefixSum.put(currSum, prefixSum.get(currSum) - 1);
-        return (int) result;
+        return result;
     }
 
 
