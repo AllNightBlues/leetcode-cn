@@ -31,4 +31,30 @@ public class LeetCode_152 {
         return ans;
     }
 
+    public int maxProduct1(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        int answer = nums[0];
+        int[] maxDP = new int[nums.length];
+        int[] minDP = new int[nums.length];
+        maxDP[0] = nums[0]; minDP[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            maxDP[i] = Math.max(maxDP[i - 1] * nums[i], Math.max(nums[i], maxDP[i - 1] * nums[i]));
+            minDP[i] = Math.min(minDP[i - 1] * nums[i], Math.min(nums[i], minDP[i - 1] * nums[i]));
+            answer = Math.max(answer, maxDP[i]);
+        }
+        return answer;
+    }
+
+    public int maxProduct2(int[] nums) {
+        if (nums.length == 1) return nums[0];
+        int answer = nums[0], max = nums[0], min = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int currMax = max * nums[i], currMin = min * nums[i];
+            max = Math.max(nums[i], Math.max(currMax, currMin));
+            min = Math.min(nums[i], Math.min(currMax, currMin));
+            answer = Math.max(answer, max);
+        }
+        return answer;
+    }
+
 }
